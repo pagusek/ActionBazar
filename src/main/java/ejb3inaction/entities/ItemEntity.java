@@ -2,6 +2,7 @@ package ejb3inaction.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.joda.time.LocalDate;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "ITEMS")
@@ -25,11 +25,14 @@ public class ItemEntity implements Serializable {
 
 	private String itemName;
 
-	private LocalDate bidEndDate;
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date bidEndDate;
 
-	private LocalDate bidStartDate;
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date bidStartDate;
 
-	private LocalDate createdDate;
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date createdDate;
 
 	private BigDecimal initialPrice;
 
@@ -44,7 +47,7 @@ public class ItemEntity implements Serializable {
 		this.id = id;
 	}
 
-	public ItemEntity(String itemName, LocalDate bidStartDate, LocalDate creationDate, BigDecimal initialPrice) {
+	public ItemEntity(String itemName, Date bidStartDate, Date creationDate, BigDecimal initialPrice) {
 		this.itemName = itemName;
 		this.bidStartDate = bidStartDate;
 		this.createdDate = creationDate;
@@ -67,27 +70,27 @@ public class ItemEntity implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public LocalDate getBidEndDate() {
+	public Date getBidEndDate() {
 		return bidEndDate;
 	}
 
-	public void setBidEndDate(LocalDate bidEndDate) {
+	public void setBidEndDate(Date bidEndDate) {
 		this.bidEndDate = bidEndDate;
 	}
 
-	public LocalDate getBidStartDate() {
+	public Date getBidStartDate() {
 		return bidStartDate;
 	}
 
-	public void setBidStartDate(LocalDate bidStartDate) {
+	public void setBidStartDate(Date bidStartDate) {
 		this.bidStartDate = bidStartDate;
 	}
 
-	public LocalDate getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(LocalDate createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 

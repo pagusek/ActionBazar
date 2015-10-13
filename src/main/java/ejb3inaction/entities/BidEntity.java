@@ -1,6 +1,7 @@
 package ejb3inaction.entities;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
@@ -11,8 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.joda.time.LocalDateTime;
+import javax.persistence.Temporal;
 
 @Named
 @RequestScoped
@@ -25,7 +25,8 @@ public class BidEntity {
 	@Column(name = "ID")
 	private Long id;
 
-	private LocalDateTime bidDate;
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date bidDate;
 
 	private BigDecimal bidPrice;
 
@@ -55,11 +56,11 @@ public class BidEntity {
 		this.id = id;
 	}
 
-	public LocalDateTime getBidDate() {
+	public Date getBidDate() {
 		return bidDate;
 	}
 
-	public void setBidDate(LocalDateTime bidDate) {
+	public void setBidDate(Date bidDate) {
 		this.bidDate = bidDate;
 	}
 

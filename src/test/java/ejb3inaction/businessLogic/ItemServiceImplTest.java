@@ -1,6 +1,7 @@
 package ejb3inaction.businessLogic;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -10,15 +11,16 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.joda.time.LocalDate;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ejb3inaction.entities.BidEntity;
 import ejb3inaction.entities.BidderEntity;
 import ejb3inaction.entities.ItemEntity;
+import ejb3inaction.entities.UserEntity;
 
 @RunWith(Arquillian.class)
 public class ItemServiceImplTest {
@@ -28,11 +30,14 @@ public class ItemServiceImplTest {
 
 	@Deployment
 	public static Archive<?> createDeployment() {
-		JavaArchive jar = ShrinkWrap.create(JavaArchive.class, "test.war");
-		jar.addClasses(ItemService.class, ItemServiceImpl.class, BidderEntity.class, BidderEntity.class, ItemEntity.class);
-		jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		JavaArchive jar = ShrinkWrap.create(JavaArchive.class, "test.jar");
+		jar.addClasses(BidService.class, BidServiceImpl.class, ItemService.class, ItemServiceImpl.class, UserService.class, UserServiceImpl.class,
+				BidderEntity.class, BidEntity.class, ItemEntity.class, UserEntity.class, ItemServiceImplTest.class);
+		// jar.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		System.out.println(jar.toString(true));
-		return jar;
+
+		final EnterpriseArchive ear = ShrinkWrap.create(EnterpriseArchive.class, "test.war").addAsLibrary(jar);
+		return ear;
 	}
 
 	@Test
@@ -43,7 +48,7 @@ public class ItemServiceImplTest {
 
 	@Test
 	public void testCreateItem() {
-		ItemEntity item = new ItemEntity("Apple IIGS", new LocalDate(), new LocalDate(), new BigDecimal(45));
+		ItemEntity item = new ItemEntity("Apple IIGS", new Date(), new Date(), new BigDecimal(45));
 		itemService.createItem(item);
 		Assert.assertNotNull(item.getId());
 		Assert.assertNotNull(itemService.getItem(item.getId()));

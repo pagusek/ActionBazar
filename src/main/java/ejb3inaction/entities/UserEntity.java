@@ -1,8 +1,9 @@
 package ejb3inaction.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import org.joda.time.LocalDate;
+import javax.persistence.Temporal;
 
 public class UserEntity implements Serializable {
 
@@ -12,7 +13,8 @@ public class UserEntity implements Serializable {
 
 	private byte[] picture;
 
-	private LocalDate birthDate;
+	@Temporal(javax.persistence.TemporalType.DATE)
+	private Date birthDate;
 
 	public UserEntity() {
 		// do nothing
@@ -39,11 +41,11 @@ public class UserEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
