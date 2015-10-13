@@ -14,8 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "ITEMS")
+@Getter
+@Setter
+@NoArgsConstructor
 public class ItemEntity implements Serializable {
 
 	@Id
@@ -39,10 +46,6 @@ public class ItemEntity implements Serializable {
 	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
 	private List<BidEntity> bids;
 
-	public ItemEntity() {
-		// do nothing
-	}
-
 	public ItemEntity(Long id) {
 		this.id = id;
 	}
@@ -52,62 +55,6 @@ public class ItemEntity implements Serializable {
 		this.bidStartDate = bidStartDate;
 		this.createdDate = creationDate;
 		this.initialPrice = initialPrice;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
-	public Date getBidEndDate() {
-		return bidEndDate;
-	}
-
-	public void setBidEndDate(Date bidEndDate) {
-		this.bidEndDate = bidEndDate;
-	}
-
-	public Date getBidStartDate() {
-		return bidStartDate;
-	}
-
-	public void setBidStartDate(Date bidStartDate) {
-		this.bidStartDate = bidStartDate;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public BigDecimal getInitialPrice() {
-		return initialPrice;
-	}
-
-	public void setInitialPrice(BigDecimal initialPrice) {
-		this.initialPrice = initialPrice;
-	}
-
-	public List<BidEntity> getBids() {
-		return bids;
-	}
-
-	public void setBids(List<BidEntity> bids) {
-		this.bids = bids;
 	}
 
 	public BidEntity addBid(BidEntity bid) {

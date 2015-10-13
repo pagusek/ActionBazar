@@ -14,10 +14,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Named
 @RequestScoped
 @Entity
 @Table(name = "BIDS")
+@Getter
+@Setter
+@NoArgsConstructor
 public class BidEntity {
 
 	@Id
@@ -38,54 +45,10 @@ public class BidEntity {
 	@JoinColumn(name = "BIDDER_ID", referencedColumnName = "USER_ID")
 	private BidderEntity bidder;
 
-	public BidEntity() {
-		// do nothing
-	}
-
 	public BidEntity(BidderEntity bidder, ItemEntity item, BigDecimal bidPrice) {
 		this.item = item;
 		this.bidder = bidder;
 		this.bidPrice = bidPrice;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Date getBidDate() {
-		return bidDate;
-	}
-
-	public void setBidDate(Date bidDate) {
-		this.bidDate = bidDate;
-	}
-
-	public BigDecimal getBidPrice() {
-		return bidPrice;
-	}
-
-	public void setBidPrice(BigDecimal bidPrice) {
-		this.bidPrice = bidPrice;
-	}
-
-	public ItemEntity getItem() {
-		return item;
-	}
-
-	public void setItem(ItemEntity item) {
-		this.item = item;
-	}
-
-	public BidderEntity getBidder() {
-		return bidder;
-	}
-
-	public void setBidder(BidderEntity bidder) {
-		this.bidder = bidder;
 	}
 
 }

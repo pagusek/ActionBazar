@@ -5,6 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Temporal;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserEntity implements Serializable {
 
 	private String firstName;
@@ -16,37 +23,9 @@ public class UserEntity implements Serializable {
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date birthDate;
 
-	public UserEntity() {
-		// do nothing
-	}
-
 	public UserEntity(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
 	}
 
 }
