@@ -1,13 +1,13 @@
 package ejb3inaction.entities;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,14 +28,14 @@ import lombok.Setter;
 public class BidEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
 
 	@Temporal(javax.persistence.TemporalType.DATE)
 	private Date bidDate;
 
-	private BigDecimal bidPrice;
+	private Double bidPrice;
 
 	@ManyToOne
 	@JoinColumn(name = "ITEM_ID", referencedColumnName = "ITEM_ID")
@@ -45,7 +45,7 @@ public class BidEntity {
 	@JoinColumn(name = "BIDDER_ID", referencedColumnName = "USER_ID")
 	private BidderEntity bidder;
 
-	public BidEntity(BidderEntity bidder, ItemEntity item, BigDecimal bidPrice) {
+	public BidEntity(BidderEntity bidder, ItemEntity item, Double bidPrice) {
 		this.item = item;
 		this.bidder = bidder;
 		this.bidPrice = bidPrice;
